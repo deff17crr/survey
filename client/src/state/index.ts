@@ -1,3 +1,4 @@
 export * from './store';
-export * as actionCreators from './action-creators';
+export * as questionnairesActionCreators from './action-creators/questionnairies';
+export * as questionnaireResultsActionCreators from './action-creators/questionnairieResults';
 export * from './reducers';

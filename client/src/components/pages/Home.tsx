@@ -2,10 +2,10 @@ import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
-
+import {QuestionnaireEntity} from "../../state/reducers/questionnairesReducer";
 
 export const Home = () => {
-  const {listQuestionnaires} = useActions();
+  const {listQuestionnaires, createQuestionnaireResult} = useActions();
   const {
     entries,
     error,
@@ -13,6 +13,10 @@ export const Home = () => {
   } = useTypedSelector((state) => state.questionnaires);
 
   useEffect(() => {listQuestionnaires()}, []);
+
+  const handleClick = (questionnaire: QuestionnaireEntity) => {
+    createQuestionnaireResult(questionnaire['@id']);
+  }
 
   return (
     <div className={"flex"}>
@@ -23,11 +27,11 @@ export const Home = () => {
             <p className="text-sm">
               {questionnaire.questionsQuantity} {questionnaire.questionsQuantity === 1 ? 'Question' : 'Questions'}
             </p>
-            <Link
-              className={"rounded border bg-blue-100 border-blue-500 text-blue-700 mt-1 px-4 py-1 inline-block hover:opacity-75"}
-              to={`/questionnaire-pass/${questionnaire.id}`}>
+            <button onClick={() => handleClick(questionnaire)} className={
+              "rounded border bg-blue-100 border-blue-500 text-blue-700 mt-2 px-4 py-1 inline-block hover:opacity-75"
+            }>
               Start
-            </Link>
+            </button>
           </div>
         </div>
       ))}

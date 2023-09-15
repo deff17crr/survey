@@ -5,10 +5,9 @@ const baseUrl = 'http://localhost:8080/api';
 
 export const fetch = (uri: string, params = {}) => {
   const authToken = getAuthToken();
-  const url = baseUrl + uri;
 
   const defaults = {
-    'method': 'GET',
+    'url': (baseUrl + uri),
     'headers': {
       'Accept': 'application/ld+json',
       'AuthToken': authToken,
@@ -20,5 +19,7 @@ export const fetch = (uri: string, params = {}) => {
     ...params,
   };
 
-  return axios.get(url, config);
+  console.log(config);
+
+  return axios.request(config);
 }

@@ -1,7 +1,8 @@
 import {ActionType} from "../action-types";
 import {Action} from "../actions";
 
-interface QuestionnaireEntity {
+export interface QuestionnaireEntity {
+  '@id': string,
   id: number,
   title: string,
   questionsQuantity: number,
