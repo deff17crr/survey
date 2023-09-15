@@ -9,6 +9,7 @@ use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -23,14 +24,23 @@ class Questionnaire
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(groups: ['questionnaire:item', 'questionnaire:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Groups(groups: ['questionnaire:item', 'questionnaire:collection'])]
     private ?string $title = null;
 
     #[ORM\OneToMany(mappedBy: 'questionnaire', targetEntity: Question::class)]
+    #[Groups(groups: ['questionnaire:item'])]
     private Collection $questions;
+
+    #[Groups(groups: ['questionnaire:item', 'questionnaire:collection'])]
+    public function getQuestionsQuantity(): int
+    {
+        return $this->questions->count();
+    }
 
     public function getId(): ?int
     {
