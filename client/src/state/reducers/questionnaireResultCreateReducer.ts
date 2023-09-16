@@ -5,8 +5,9 @@ import {QuestionnaireEntity} from "./questionnairesReducer";
 export interface QuestionnaireResultEntity {
   '@id': string,
   id: number,
-  questionnaire: string|QuestionnaireEntity,
-  completedAt: string|null
+  questionnaire: QuestionnaireEntity,
+  completedAt: string|null,
+  questionAnswersQuantity: number,
 }
 
 interface QuestionnaireResultCreateState {

@@ -5,7 +5,7 @@ export interface QuestionnaireEntity {
   '@id': string,
   id: number,
   title: string,
-  questionsQuantity: number,
+  questionsQuantity: number|undefined,
 }
 
 interface QuestionnairesState {

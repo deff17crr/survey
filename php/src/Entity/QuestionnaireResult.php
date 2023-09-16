@@ -42,7 +42,7 @@ class QuestionnaireResult
     #[ORM\ManyToOne(targetEntity: Questionnaire::class)]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
-    #[Groups(['questionnaireResult:item', 'questionnaireResult:item', 'questionnaireResult:create'])]
+    #[Groups(['questionnaireResult:item', 'questionnaireResult:collection', 'questionnaireResult:create'])]
     private ?Questionnaire $questionnaire;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -52,6 +52,12 @@ class QuestionnaireResult
     #[ORM\OneToMany(mappedBy: 'questionnaireResult', targetEntity: QuestionAnswer::class, )]
     #[Groups(['questionnaireResult:item'])]
     private Collection $questionAnswers;
+
+    #[Groups(groups: ['questionnaireResult:item', 'questionnaireResult:collection'])]
+    public function getQuestionAnswersQuantity(): int
+    {
+        return $this->questionAnswers->count();
+    }
 
     public function getId(): ?int
     {
