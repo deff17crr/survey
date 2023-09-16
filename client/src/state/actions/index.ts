@@ -31,3 +31,19 @@ export interface QuestionnaireResultCreateErrorAction {
 }
 
 export type QuestionnaireResultCreateCommonAction = QuestionnaireResultCreateAction | QuestionnaireResultCreateSuccessAction | QuestionnaireResultCreateErrorAction;
+
+export interface QuestionnaireResultsListAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_LIST,
+}
+
+export interface QuestionnaireResultsListSuccessAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_LIST_SUCCESS,
+  payload: QuestionnaireResultEntity[],
+}
+
+export interface QuestionnaireResultsListErrorAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_LIST_ERROR,
+  payload: string
+}
+
+export type QuestionnaireResultsListCommonAction = QuestionnaireResultsListAction | QuestionnaireResultsListSuccessAction | QuestionnaireResultsListErrorAction;

@@ -2,18 +2,22 @@ import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {QuestionnaireEntity} from "../../state/reducers/questionnairesReducer";
-import {DefaultAlert, ErrorAlert, WarningAlert} from "../Alert";
+import {DefaultAlert, ErrorAlert} from "../Alert";
 import {useEffect} from "react";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const {listQuestionnaires, createQuestionnaireResult} = useActions();
+  const {listQuestionnaires, createQuestionnaireResult, listQuestionnaireResults} = useActions();
   const questionnaires = useTypedSelector((state) => state.questionnaires);
+  const questionnaireResults = useTypedSelector((state) => state.questionnaireResultsList);
   const questionnaireResultCreate = useTypedSelector((state) => state.questionnaireResultCreate);
-  const loading = questionnaires.loading || questionnaireResultCreate.loading;
-  const error = questionnaires.error || questionnaireResultCreate.error;
+  const loading = questionnaires.loading || questionnaireResultCreate.loading || questionnaireResults.loading;
+  const error = questionnaires.error || questionnaireResultCreate.error || questionnaireResults.error;
 
-  useEffect(() => {listQuestionnaires()}, []);
+  useEffect(() => {
+    listQuestionnaires();
+    listQuestionnaireResults({'order[completedAt]': 'desc'});
+  }, []);
 
   const handleClick = (questionnaire: QuestionnaireEntity) => {
     createQuestionnaireResult(questionnaire['@id']);
@@ -23,6 +27,11 @@ export const Home = () => {
     navigate(`/questionnaire-pass/${questionnaireResultCreate.data['id']}`);
 
     return <></>;
+  }
+
+  let notCompletedQuestionnaireResult;
+  if (questionnaireResults.data.length > 0 && questionnaireResults.data[0]['completedAt'] === null) {
+    notCompletedQuestionnaireResult = questionnaireResults.data[0];
   }
 
   return (
