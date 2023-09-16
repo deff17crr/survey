@@ -1,17 +1,33 @@
 import {ActionType} from "../action-types";
+import {QuestionnaireResultEntity} from "../reducers/questionnaireResultCreateReducer";
 
 export interface ListQuestionnaireAction {
-  type: ActionType.LIST_QUESTIONNAIRE
+  type: ActionType.QUESTIONNAIRE_LIST
 }
 
 export interface ListQuestionnaireSuccessAction {
-  type: ActionType.LIST_QUESTIONNAIRE_SUCCESS
+  type: ActionType.QUESTIONNAIRE_LIST_SUCCESS
   payload: [],
 }
 
 export interface ListQuestionnaireErrorAction {
-  type: ActionType.LIST_QUESTIONNAIRE_ERROR
+  type: ActionType.QUESTIONNAIRE_LIST_ERROR
   payload: string
 }
 
 export type Action = ListQuestionnaireAction | ListQuestionnaireSuccessAction | ListQuestionnaireErrorAction;
+export interface QuestionnaireResultCreateAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_CREATE,
+}
+
+export interface QuestionnaireResultCreateSuccessAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_CREATE_SUCCESS,
+  payload: QuestionnaireResultEntity,
+}
+
+export interface QuestionnaireResultCreateErrorAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_CREATE_ERROR,
+  payload: string
+}
+
+export type QuestionnaireResultCreateCommonAction = QuestionnaireResultCreateAction | QuestionnaireResultCreateSuccessAction | QuestionnaireResultCreateErrorAction;

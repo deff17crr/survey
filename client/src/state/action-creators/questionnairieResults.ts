@@ -1,11 +1,11 @@
 import { ActionType } from "../action-types";
-import { Action } from "../actions";
+import { QuestionnaireResultCreateCommonAction } from "../actions";
 import {Dispatch} from "redux";
 import {fetch} from "../../utils/fetch";
 
 export const createQuestionnaireResult = (questionnaireIRI: string) => {
-  return async (dispatch: Dispatch<Action>) => {
-    dispatch({type: ActionType.LIST_QUESTIONNAIRE});
+  return async (dispatch: Dispatch<QuestionnaireResultCreateCommonAction>) => {
+    dispatch({type: ActionType.QUESTIONNAIRE_RESULT_CREATE});
 
     const options = {
       'method': 'POST',
@@ -16,13 +16,13 @@ export const createQuestionnaireResult = (questionnaireIRI: string) => {
       const { data } = await fetch('/questionnaire_results', options);
 
       dispatch({
-        type: ActionType.LIST_QUESTIONNAIRE_SUCCESS,
-        payload: data['hydra:member'],
+        type: ActionType.QUESTIONNAIRE_RESULT_CREATE_SUCCESS,
+        payload: data,
       });
     } catch (err) {
       if (err instanceof Error) {
         dispatch({
-          type: ActionType.LIST_QUESTIONNAIRE_ERROR,
+          type: ActionType.QUESTIONNAIRE_RESULT_CREATE_ERROR,
           payload: err.message,
         });
       }

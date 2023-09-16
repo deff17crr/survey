@@ -19,7 +19,5 @@ export const fetch = (uri: string, params = {}) => {
     ...params,
   };
 
-  console.log(config);
-
   return axios.request(config);
 }

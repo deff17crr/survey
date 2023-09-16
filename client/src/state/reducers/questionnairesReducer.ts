@@ -11,13 +11,13 @@ export interface QuestionnaireEntity {
 interface QuestionnairesState {
   loading: boolean,
   error: string | null
-  entries: QuestionnaireEntity[]
+  data: QuestionnaireEntity[]
 }
 
 const initialState = {
   loading: false,
   error: null,
-  entries: [],
+  data: [],
 };
 
 const reducer = (
@@ -25,16 +25,15 @@ const reducer = (
   action: Action,
 ): QuestionnairesState => {
   switch (action.type) {
-    case ActionType.LIST_QUESTIONNAIRE:
-      return {loading: true, error: null, entries: []};
-    case ActionType.LIST_QUESTIONNAIRE_SUCCESS:
-      return {loading: false, error: null, entries: action.payload};
-    case ActionType.LIST_QUESTIONNAIRE_ERROR:
-      return {loading: false, error: action.payload, entries: []};
+    case ActionType.QUESTIONNAIRE_LIST:
+      return {loading: true, error: null, data: []};
+    case ActionType.QUESTIONNAIRE_LIST_SUCCESS:
+      return {loading: false, error: null, data: action.payload};
+    case ActionType.QUESTIONNAIRE_LIST_ERROR:
+      return {loading: false, error: action.payload, data: []};
     default:
       return state;
   }
-
 }
 
 export default reducer;
