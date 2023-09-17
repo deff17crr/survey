@@ -1,14 +1,14 @@
 import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResultCreateReducer";
-import {QuestionnaireEntity} from "../../state/reducers/questionnairesReducer";
-import PropTypes from "prop-types";
-
-interface ComponentPropTypes {
-  questionnaires: QuestionnaireEntity[],
-  handleClick: (questionnaire: QuestionnaireEntity) => void
-}
+import {useNavigate} from "react-router-dom";
 
 export function NotCompletedQuestionnaireResult(props: {questionnaireResult: QuestionnaireResultEntity}) {
   const {questionnaireResult} = props;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/questionnaire-pass/${questionnaireResult['id']}`);
+  }
+
   return (
     <>
       <h3 className={'pb-2 mb-3 mt-5 border-b-2 border-gray-700 text-gray-700'}>Previously Started Questionnaires</h3>
@@ -18,7 +18,7 @@ export function NotCompletedQuestionnaireResult(props: {questionnaireResult: Que
           <p className="text-sm">
             {questionnaireResult.questionAnswersQuantity} {questionnaireResult.questionAnswersQuantity === 1 ? 'Answer' : 'Answers'}
           </p>
-          <button className={
+          <button onClick={handleClick} className={
             "rounded border bg-white border-fuchsia-500 text-fuchsia-700 mt-2 px-4 py-1 inline-block hover:opacity-75"
           }>
             Continue

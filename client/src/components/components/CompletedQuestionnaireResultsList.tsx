@@ -1,6 +1,12 @@
 import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResultCreateReducer";
+import {useNavigate} from "react-router-dom";
 
 export function CompletedQuestionnaireResultsList(props: {questionnaireResults: QuestionnaireResultEntity[]}) {
+  const navigate = useNavigate();
+  const handleClick = (questionnaireResult: QuestionnaireResultEntity) => {
+    navigate(`/questionnaire-result/${questionnaireResult['id']}`);
+  }
+
   return (
     <>
       <h3 className={'pb-2 mb-3 mt-10 border-b-2 border-gray-700 text-gray-700'}>Previously Passed Questionnaires</h3>
@@ -12,7 +18,7 @@ export function CompletedQuestionnaireResultsList(props: {questionnaireResults: 
               <p className="text-sm">
                 {questionnaireResult.questionAnswersQuantity} {questionnaireResult.questionAnswersQuantity === 1 ? 'Answer' : 'Answers'}
               </p>
-              <button className={
+              <button onClick={() => handleClick(questionnaireResult)} className={
                 "rounded border bg-white border-indigo-500 text-indigo-700 mt-2 px-4 py-1 inline-block hover:opacity-75"
               }>
                 View Answers
