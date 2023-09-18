@@ -6,6 +6,7 @@ import React, {useEffect} from "react";
 import {QuestionForm} from "../components/QuestionForm";
 import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
 import {QuestionEntity} from "../../state/reducers/questionnaire/list";
+import {DefaultAlert} from "../components/Alert";
 
 type RouteParams = {
   iri: string;
@@ -25,7 +26,7 @@ export const PassQuestionnaire: React.FC = () => {
   useEffect(loadQuestionnaireResult, []);
 
   if (loading) {
-    return <h1 className="text-center">Loading...</h1>
+    return <DefaultAlert message={'Loading...'} />
   }
 
   if (!questionnaireResult) {
@@ -33,7 +34,7 @@ export const PassQuestionnaire: React.FC = () => {
   }
 
   if (!!questionnaireResult['completedAt']) {
-    navigate(`/questionnaire-result/${questionnaireResult['id']}`);
+    navigate(`/questionnaire-result/${encodeURIComponent(questionnaireResult['@id'])}`);
 
     return null;
   }
@@ -42,7 +43,9 @@ export const PassQuestionnaire: React.FC = () => {
 
   return (
     <div className={'w-100'}>
-      <h1 className={'text-4xl font-bold mb-3'}>{questionnaireResult['questionnaire']['title']}</h1>
+      <h3 className={'pb-1 mb-7 mt-5 border-b-2 border-gray-700 text-2xl'}>
+        {questionnaireResult['questionnaire']['title']}
+      </h3>
 
       {currentQuestion && (
         <QuestionForm

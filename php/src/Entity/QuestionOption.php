@@ -26,6 +26,7 @@ class QuestionOption
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('questionnaireResult:completed')]
     private bool $correct = true;
 
     #[ORM\Column(length: 255)]

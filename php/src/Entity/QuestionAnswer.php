@@ -34,6 +34,7 @@ class QuestionAnswer
     private ?int $id = null;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups(['questionnaireResult:completed'])]
     private bool $correct = true;
 
     #[ORM\ManyToOne(targetEntity: QuestionnaireResult::class, inversedBy: "questionAnswers")]

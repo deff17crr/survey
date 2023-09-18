@@ -94,9 +94,12 @@ class Question
         $this->questionnaire = $questionnaire;
     }
 
-    public function getQuestionOptions(): Collection
+    public function getQuestionOptions(): array
     {
-        return $this->questionOptions;
+        $options = $this->questionOptions->toArray();
+        shuffle($options);
+
+        return $options;
     }
 
     public function setQuestionOptions(array $questionOptions): void

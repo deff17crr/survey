@@ -50,7 +50,7 @@ class QuestionnaireResult
     private ?DateTime $completedAt;
 
     #[ORM\OneToMany(mappedBy: 'questionnaireResult', targetEntity: QuestionAnswer::class)]
-    #[Groups(['questionnaireResult:item'])]
+    #[Groups(['questionnaireResult:completed'])]
     private Collection $questionAnswers;
 
     #[ORM\Column(type: 'integer')]
@@ -127,5 +127,10 @@ class QuestionnaireResult
     public function setLastAnsweredQuestionOrder(int $lastAnsweredQuestionOrder): void
     {
         $this->lastAnsweredQuestionOrder = $lastAnsweredQuestionOrder;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->completedAt !== null;
     }
 }

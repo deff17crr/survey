@@ -48,7 +48,7 @@ export const QuestionForm: React.FC<QuestionComponentProperty> = (props) => {
         <ErrorAlert message={error} />
       )}
       <h3 className={'text-indigo-700 mb-2'}>
-        <span className={'text-gray-700'}>Question:</span> {question['title']} order: {question['order']} id: {question['id']}
+        <span className={'text-gray-700'}>Question:</span> {question['title']}
       </h3>
       {question.questionOptions.map(option => (
         <div className="flex items-center mb-4 pl-4" key={option['id']}>

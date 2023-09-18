@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 export function CompletedQuestionnaireResultsList(props: {questionnaireResults: QuestionnaireResultEntity[]}) {
   const navigate = useNavigate();
   const handleClick = (questionnaireResult: QuestionnaireResultEntity) => {
-    navigate(`/questionnaire-result/${questionnaireResult['id']}`);
+    navigate(`/questionnaire-result/${encodeURIComponent(questionnaireResult['@id'])}`);
   }
 
   return (
