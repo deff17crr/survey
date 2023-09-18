@@ -241,6 +241,25 @@ class LoadTestDataCommand extends Command
 
         $this->entityManager->flush();
 
+        $questionnaire2 = new Questionnaire();
+        $questionnaire2->setTitle('Second Questionnaire for Test');
+        $this->entityManager->persist($questionnaire2);
+
+        $question11 = new Question();
+        $question11->setQuestionnaire($questionnaire2);
+        $question11->setTitle('11 +11 = ');
+        $question11->setOrder(1);
+        $this->entityManager->persist($question11);
+
+        foreach (['22' => true, '33' => false, '44 - 22' => true, '20' => false] as $key => $value) {
+            $question11option = new QuestionOption();
+            $question11option->setQuestion($question11);
+            $question11option->setText($key);
+            $question11option->setCorrect($value);
+            $this->entityManager->persist($question11option);
+        }
+        $this->entityManager->flush();
+
         return Command::SUCCESS;
     }
 }
