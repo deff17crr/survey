@@ -35,7 +35,7 @@ class Question
     #[Assert\NotBlank]
     private string $type = self::TYPE_SINGLE;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(name: '`order`', type: 'integer')]
     #[Assert\Range(min: 1)]
     #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private int $order = 1;
