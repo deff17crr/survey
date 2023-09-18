@@ -1,5 +1,5 @@
 import {ActionType} from "../action-types";
-import {QuestionnaireResultEntity} from "../reducers/questionnaireResultCreateReducer";
+import {QuestionnaireResultEntity} from "../reducers/questionnaireResult/create";
 
 export interface ListQuestionnaireAction {
   type: ActionType.QUESTIONNAIRE_LIST
@@ -47,3 +47,20 @@ export interface QuestionnaireResultsListErrorAction {
 }
 
 export type QuestionnaireResultsListCommonAction = QuestionnaireResultsListAction | QuestionnaireResultsListSuccessAction | QuestionnaireResultsListErrorAction;
+
+
+export interface QuestionnaireResultsGetAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_GET,
+}
+
+export interface QuestionnaireResultsGetSuccessAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_GET_SUCCESS,
+  payload: QuestionnaireResultEntity,
+}
+
+export interface QuestionnaireResultsGetErrorAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_GET_ERROR,
+  payload: string
+}
+
+export type QuestionnaireResultsGetCommonAction = QuestionnaireResultsGetAction | QuestionnaireResultsGetSuccessAction | QuestionnaireResultsGetErrorAction;

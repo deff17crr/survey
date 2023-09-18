@@ -10,4 +10,8 @@ export enum ActionType {
   QUESTIONNAIRE_RESULT_LIST = 'questionnaire_result_list',
   QUESTIONNAIRE_RESULT_LIST_SUCCESS = 'questionnaire_result_list_success',
   QUESTIONNAIRE_RESULT_LIST_ERROR = 'questionnaire_result_list_error',
+
+  QUESTIONNAIRE_RESULT_GET = 'questionnaire_result_get',
+  QUESTIONNAIRE_RESULT_GET_SUCCESS = 'questionnaire_result_get_success',
+  QUESTIONNAIRE_RESULT_GET_ERROR = 'questionnaire_result_get_error',
 }

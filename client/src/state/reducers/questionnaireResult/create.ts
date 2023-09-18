@@ -1,6 +1,6 @@
-import {ActionType} from "../action-types";
-import {QuestionnaireResultCreateCommonAction} from "../actions";
-import {QuestionnaireEntity} from "./questionnairesReducer";
+import {ActionType} from "../../action-types";
+import {QuestionnaireResultCreateCommonAction} from "../../actions";
+import {QuestionnaireEntity} from "../questionnaire/list";
 
 export interface QuestionnaireResultEntity {
   '@id': string,

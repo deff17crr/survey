@@ -1,4 +1,4 @@
-import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResultCreateReducer";
+import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
 import {useNavigate} from "react-router-dom";
 
 export function CompletedQuestionnaireResultsList(props: {questionnaireResults: QuestionnaireResultEntity[]}) {

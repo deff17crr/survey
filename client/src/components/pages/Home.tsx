@@ -1,10 +1,10 @@
 import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
-import {QuestionnaireEntity} from "../../state/reducers/questionnairesReducer";
+import {QuestionnaireEntity} from "../../state/reducers/questionnaire/list";
 import {DefaultAlert, ErrorAlert} from "../components/Alert";
 import {useEffect} from "react";
-import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResultCreateReducer";
+import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
 import {CompletedQuestionnaireResultsList} from "../components/CompletedQuestionnaireResultsList";
 import {AvailableQuestionnairesList} from "../components/AvailableQuestionnairesList";
 import {NotCompletedQuestionnaireResult} from "../components/NotCompletedQuestionnaireResult";

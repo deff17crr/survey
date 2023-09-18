@@ -1,6 +1,6 @@
-import {ActionType} from "../action-types";
-import {QuestionnaireResultsListCommonAction} from "../actions";
-import {QuestionnaireResultEntity} from "./questionnaireResultCreateReducer";
+import {ActionType} from "../../action-types";
+import {QuestionnaireResultsListCommonAction} from "../../actions";
+import {QuestionnaireResultEntity} from "./create";
 
 interface QuestionnaireResultsListState {
   loading: boolean,
