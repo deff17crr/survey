@@ -1,6 +1,6 @@
 import {Home} from "./components/pages/Home";
-import {QuestionnaireResultView} from "./components/pages/questionnaire/QuestionnaireResultView";
-import {PassQuestionnaire} from "./components/pages/questionnaire/PassQuestionnaire";
+import {QuestionnaireResultView} from "./components/pages/QuestionnaireResultView";
+import {PassQuestionnaire} from "./components/pages/PassQuestionnaire";
 
 
 export const routes = [

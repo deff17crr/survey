@@ -10,9 +10,9 @@ export function CompletedQuestionnaireResultsList(props: {questionnaireResults: 
   return (
     <>
       <h3 className={'pb-2 mb-3 mt-10 border-b-2 border-gray-700 text-gray-700'}>Previously Passed Questionnaires</h3>
-      <div className={'flex'}>
+      <div >
         {props.questionnaireResults.map(questionnaireResult => (
-          <div key={questionnaireResult.id} className={"w-1/3 pr-3"}>
+          <div key={questionnaireResult.id} className={"w-1/3 px-2 float-left"}>
             <div className="bg-indigo-100 border-indigo-500 text-indigo-700 border rounded shadow-md mb-5 px-4 py-3" role="alert">
               <p className="font-bold">{questionnaireResult['questionnaire'].title}</p>
               <p className="text-sm">

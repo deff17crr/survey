@@ -34,6 +34,8 @@ const reducer = (
       return {loading: false, error: null, data: action.payload};
     case ActionType.QUESTIONNAIRE_RESULT_CREATE_ERROR:
       return {loading: false, error: action.payload, data: null};
+    case ActionType.QUESTIONNAIRE_RESULT_CREATE_RESET:
+      return {loading: false, error: null, data: null};
     default:
       return state;
   }

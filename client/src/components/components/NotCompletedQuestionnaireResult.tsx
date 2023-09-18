@@ -12,8 +12,8 @@ export const NotCompletedQuestionnaireResult: React.FC<{questionnaireResult: Que
 
   return (
     <>
-      <h3 className={'pb-2 mb-3 mt-5 border-b-2 border-gray-700 text-gray-700'}>Previously Started Questionnaires</h3>
-      <div className={"w-1/3 pr-3"}>
+      <h3 className={'pb-2 mb-3 mt-5 border-b-2 border-gray-700 text-gray-700'}>Previously Started Questionnaire</h3>
+      <div className={"w-1/3 px-2 float-left"}>
         <div className="bg-fuchsia-100 border-fuchsia-500 text-fuchsia-700 border rounded shadow-md mb-5 px-4 py-3" role="alert">
           <p className="font-bold">{questionnaireResult.questionnaire.title}</p>
           <p className="text-sm">
@@ -26,6 +26,7 @@ export const NotCompletedQuestionnaireResult: React.FC<{questionnaireResult: Que
           </button>
         </div>
       </div>
+      <div className={'clear-both'} />
     </>
   );
 }

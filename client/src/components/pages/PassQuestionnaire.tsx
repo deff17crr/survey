@@ -1,11 +1,11 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import NotFound from "../../components/NotFound";
-import {useActions} from "../../../hooks/useActions";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import NotFound from "../components/NotFound";
+import {useActions} from "../../hooks/useActions";
 import React, {useEffect} from "react";
-import {QuestionForm} from "../../components/QuestionForm";
-import {QuestionnaireResultEntity} from "../../../state/reducers/questionnaireResult/create";
-import {QuestionEntity} from "../../../state/reducers/questionnaire/list";
+import {QuestionForm} from "../components/QuestionForm";
+import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
+import {QuestionEntity} from "../../state/reducers/questionnaire/list";
 
 type RouteParams = {
   iri: string;

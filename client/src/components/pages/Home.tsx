@@ -11,7 +11,7 @@ import {NotCompletedQuestionnaireResult} from "../components/NotCompletedQuestio
 
 export const Home = () => {
   const navigate = useNavigate();
-  const {listQuestionnaires, createQuestionnaireResult, listQuestionnaireResults} = useActions();
+  const {listQuestionnaires, createQuestionnaireResult, listQuestionnaireResults, resetCreateQuestionnaireResult} = useActions();
   const questionnaires = useTypedSelector((state) => state.questionnaires);
   const questionnaireResults = useTypedSelector((state) => state.questionnaireResultsList);
   const questionnaireResultCreate = useTypedSelector((state) => state.questionnaireResultCreate);
@@ -29,6 +29,7 @@ export const Home = () => {
 
   if (questionnaireResultCreate.data) {
     navigate(`/questionnaire-pass/${encodeURIComponent(questionnaireResultCreate.data['@id'])}`);
+    resetCreateQuestionnaireResult();
 
     return <></>;
   }

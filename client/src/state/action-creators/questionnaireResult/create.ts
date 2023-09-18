@@ -1,5 +1,9 @@
 import { ActionType} from "../../action-types";
-import { QuestionnaireResultCreateCommonAction} from "../../actions";
+import {
+  QuestionAnswerCreateCommonAction,
+  QuestionnaireResultCreateCommonAction,
+  QuestionnaireResultCreateResetAction
+} from "../../actions";
 import {Dispatch} from "redux";
 import {fetch} from "../../../utils/fetch";
 
@@ -27,5 +31,13 @@ export const createQuestionnaireResult = (questionnaireIRI: string) => {
         });
       }
     }
+  }
+}
+
+export function resetCreateQuestionnaireResult() {
+  return (dispatch: Dispatch<QuestionnaireResultCreateResetAction>) => {
+    dispatch({
+      type: ActionType.QUESTIONNAIRE_RESULT_CREATE_RESET,
+    });
   }
 }

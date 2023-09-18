@@ -31,7 +31,11 @@ export interface QuestionnaireResultCreateErrorAction {
   payload: string
 }
 
-export type QuestionnaireResultCreateCommonAction = QuestionnaireResultCreateAction | QuestionnaireResultCreateSuccessAction | QuestionnaireResultCreateErrorAction;
+export interface QuestionnaireResultCreateResetAction {
+  type: ActionType.QUESTIONNAIRE_RESULT_CREATE_RESET,
+}
+
+export type QuestionnaireResultCreateCommonAction = QuestionnaireResultCreateAction | QuestionnaireResultCreateSuccessAction | QuestionnaireResultCreateErrorAction | QuestionnaireResultCreateResetAction;
 
 export interface QuestionnaireResultsListAction {
   type: ActionType.QUESTIONNAIRE_RESULT_LIST,

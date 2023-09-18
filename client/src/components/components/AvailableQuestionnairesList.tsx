@@ -10,9 +10,9 @@ export function AvailableQuestionnairesList(props: ComponentPropTypes) {
   return (
     <>
       <h3 className={'pb-2 mb-3 mt-5 border-b-2 border-gray-700 text-gray-700'}>Available Questionnaires</h3>
-      <div className={"flex"}>
+      <div>
         {questionnaires && questionnaires.map(questionnaire => (
-          <div key={questionnaire.id} className={"w-1/3 pr-3"}>
+          <div key={questionnaire.id} className={"w-1/3 px-2 float-left"}>
             <div className="bg-blue-100 border rounded shadow-md mb-5 border-blue-500 text-blue-700 px-4 py-3" role="alert">
               <p className="font-bold">{questionnaire.title}</p>
               <p className="text-sm">
@@ -26,6 +26,7 @@ export function AvailableQuestionnairesList(props: ComponentPropTypes) {
             </div>
           </div>
         ))}
+        <div className={'clear-both'} />
       </div>
     </>
   );

@@ -6,6 +6,7 @@ export enum ActionType {
   QUESTIONNAIRE_RESULT_CREATE = 'questionnaire_result_create',
   QUESTIONNAIRE_RESULT_CREATE_SUCCESS = 'questionnaire_result_create_success',
   QUESTIONNAIRE_RESULT_CREATE_ERROR = 'questionnaire_result_create_error',
+  QUESTIONNAIRE_RESULT_CREATE_RESET = 'questionnaire_result_create_reset',
 
   QUESTIONNAIRE_RESULT_LIST = 'questionnaire_result_list',
   QUESTIONNAIRE_RESULT_LIST_SUCCESS = 'questionnaire_result_list_success',
