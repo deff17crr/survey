@@ -1,12 +1,13 @@
 import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
 import {useNavigate} from "react-router-dom";
+import React from "react";
 
-export function NotCompletedQuestionnaireResult(props: {questionnaireResult: QuestionnaireResultEntity}) {
+export const NotCompletedQuestionnaireResult: React.FC<{questionnaireResult: QuestionnaireResultEntity}> = (props) => {
   const {questionnaireResult} = props;
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/questionnaire-pass/${questionnaireResult['id']}`);
+    navigate(`/questionnaire-pass/${encodeURIComponent(questionnaireResult['@id'])}`);
   }
 
   return (

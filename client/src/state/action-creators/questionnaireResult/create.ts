@@ -13,7 +13,7 @@ export const createQuestionnaireResult = (questionnaireIRI: string) => {
     }
 
     try {
-      const { data } = await fetch('/questionnaire_results', options);
+      const { data } = await fetch('/api/questionnaire_results', options);
 
       dispatch({
         type: ActionType.QUESTIONNAIRE_RESULT_CREATE_SUCCESS,

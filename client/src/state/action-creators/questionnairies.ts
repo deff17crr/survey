@@ -8,7 +8,7 @@ export const listQuestionnaires = (filters = {}) => {
     dispatch({type: ActionType.QUESTIONNAIRE_LIST});
 
     try {
-      const { data } = await fetch('/questionnaires', filters);
+      const { data } = await fetch('/api/questionnaires', filters);
 
       dispatch({
         type: ActionType.QUESTIONNAIRE_LIST_SUCCESS,

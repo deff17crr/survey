@@ -1,11 +1,25 @@
 import {ActionType} from "../../action-types";
 import {Action} from "../../actions";
 
+export interface QuestionOptionEntity {
+  '@id': string,
+  id: number,
+  text: string,
+}
+
+export interface QuestionEntity {
+  '@id': string,
+  id: number,
+  title: string,
+  questionOptions: QuestionOptionEntity[],
+}
+
 export interface QuestionnaireEntity {
   '@id': string,
   id: number,
   title: string,
   questionsQuantity: number|undefined,
+  questions: QuestionEntity[],
 }
 
 interface QuestionnairesState {

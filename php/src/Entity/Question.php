@@ -8,7 +8,9 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -26,14 +28,20 @@ class Question
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private string $type = self::TYPE_SINGLE;
 
+//    #[ORM\Column(type: 'integer')]
+//    #[Assert\Range(min: 0)]
+//    private int $order = 0;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private ?string $title;
 
     #[ORM\ManyToOne(targetEntity: Questionnaire::class, inversedBy: 'questions')]
@@ -41,7 +49,8 @@ class Question
     #[Assert\NotNull]
     private ?Questionnaire $questionnaire;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: QuestionOption::class, )]
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: QuestionOption::class)]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private Collection $questionOptions;
 
     public function __construct()

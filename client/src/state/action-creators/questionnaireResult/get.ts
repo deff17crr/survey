@@ -3,7 +3,7 @@ import {QuestionnaireResultsGetCommonAction, QuestionnaireResultsListCommonActio
 import {Dispatch} from "redux";
 import {fetch} from "../../../utils/fetch";
 
-export const gteQuestionnaireResult = (iri: string) => {
+export const getQuestionnaireResult = (iri: string) => {
   return async (dispatch: Dispatch<QuestionnaireResultsGetCommonAction>) => {
     dispatch({type: ActionType.QUESTIONNAIRE_RESULT_GET});
 

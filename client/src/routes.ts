@@ -9,11 +9,11 @@ export const routes = [
     component: Home,
   },
   {
-    url: `/questionnaire-result/:id`,
+    url: `/questionnaire-result/:iri`,
     component: QuestionnaireResultView,
   },
   {
-    url: `/questionnaire-pass/:id`,
+    url: `/questionnaire-pass/:iri`,
     component: PassQuestionnaire,
   },
 ];

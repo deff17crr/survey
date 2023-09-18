@@ -1,7 +1,7 @@
 import {getAuthToken} from "./authToken";
 import axios from "axios";
 
-const baseUrl = 'http://localhost:8080/api';
+const baseUrl = 'http://localhost:8080';
 
 export const fetch = (uri: string, params = {}) => {
   //const authToken = getAuthToken(); or implement authentication

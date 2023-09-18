@@ -49,7 +49,7 @@ class QuestionnaireResult
     #[Groups(['questionnaireResult:item', 'questionnaireResult:collection'])]
     private ?DateTime $completedAt;
 
-    #[ORM\OneToMany(mappedBy: 'questionnaireResult', targetEntity: QuestionAnswer::class, )]
+    #[ORM\OneToMany(mappedBy: 'questionnaireResult', targetEntity: QuestionAnswer::class)]
     #[Groups(['questionnaireResult:item'])]
     private Collection $questionAnswers;
 
@@ -100,5 +100,17 @@ class QuestionnaireResult
             $questionAnswer->setQuestionnaireResult($this);
             $this->questionAnswers->add($questionAnswer);
         }
+    }
+
+    public function isQuestionAlreadyAnswered(Question $question): bool
+    {
+        foreach ($this->questionAnswers as $questionAnswer) {
+            /** @var $questionAnswer QuestionAnswer */
+            if ($questionAnswer->getId() !== null && $questionAnswer->getQuestion()->getId() === $question->getId()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -21,6 +22,7 @@ class QuestionOption
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -28,6 +30,7 @@ class QuestionOption
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private ?string $text = null;
 
     #[ORM\ManyToOne(targetEntity: Question::class, inversedBy: 'questionOptions')]

@@ -29,11 +29,13 @@ class Questionnaire
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Groups(groups: ['questionnaire:item', 'questionnaire:collection', 'questionnaireResult:collection'])]
+    #[Groups(groups: ['questionnaire:item', 'questionnaire:collection', 'questionnaireResult:collection', 'questionnaireResult:item'])]
     private ?string $title = null;
 
+
+    /** @var Collection|Question[] */
     #[ORM\OneToMany(mappedBy: 'questionnaire', targetEntity: Question::class)]
-    #[Groups(groups: ['questionnaire:item'])]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
     private Collection $questions;
 
     #[Groups(groups: ['questionnaire:item', 'questionnaire:collection'])]

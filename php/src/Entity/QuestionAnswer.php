@@ -5,46 +5,56 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(normalizationContext: ['question:item']),
-        new GetCollection(normalizationContext: ['question:collection']),
+        new Get(normalizationContext: ['question:item', 'questionAnswer:item']),
+        new GetCollection(normalizationContext: ['question:collection', 'questionAnswer:collection']),
+        new Post(
+            normalizationContext: ['question:collection', 'questionAnswer:item'],
+            denormalizationContext: ['groups' => ['questionAnswer:create']],
+            security: 'is_granted("CREATE_QUESTION_ANSWER")',
+        )
     ],
 )]
 class QuestionAnswer
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['questionAnswer:collection', 'questionnaireResult:item'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $correct = false;
+    private bool $correct = true;
 
     #[ORM\ManyToOne(targetEntity: QuestionnaireResult::class, inversedBy: "questionAnswers")]
     #[Assert\NotNull]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['questionAnswer:item'])]
     private ?QuestionnaireResult $questionnaireResult;
 
     #[ORM\ManyToOne(targetEntity: Question::class)]
     #[Assert\NotNull]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['questionAnswer:item', 'questionAnswer:create', 'questionnaireResult:item'])]
     private ?Question $question;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: QuestionOptionSelected::class, )]
-    private Collection $questionOptionsSelected;
+    #[ORM\ManyToOne(targetEntity: QuestionOption::class)]
+    #[Groups(['questionAnswer:item', 'questionAnswer:create', 'questionnaireResult:item'])]
+    private Collection $selectedQuestionOptions;
 
     public function __construct()
     {
-        $this->questionOptionsSelected = new ArrayCollection();
+        $this->selectedQuestionOptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,16 +92,15 @@ class QuestionAnswer
         $this->question = $question;
     }
 
-    public function getQuestionOptionsSelected(): Collection
+    public function getSelectedQuestionOptions(): Collection
     {
-        return $this->questionOptionsSelected;
+        return $this->selectedQuestionOptions;
     }
 
-    public function addQuestionOptionsSelected(QuestionOptionSelected $questionOptionsSelected): void
+    public function addQuestionOptionSelected(QuestionOption $questionOption): void
     {
-        if (!$this->questionOptionsSelected->contains($questionOptionsSelected)) {
-            $questionOptionsSelected->setQuestionAnswer($this);
-            $this->questionOptionsSelected->add($questionOptionsSelected);
+        if (!$this->selectedQuestionOptions->contains($questionOption)) {
+            $this->selectedQuestionOptions->add($questionOption);
         }
     }
 }

@@ -8,7 +8,7 @@ export const listQuestionnaireResults = (order = {}) => {
     dispatch({type: ActionType.QUESTIONNAIRE_RESULT_LIST});
 
     let urlParams = new URLSearchParams(order);
-    const url = '/questionnaire_results?' + decodeURIComponent(urlParams.toString());
+    const url = '/api/questionnaire_results?' + decodeURIComponent(urlParams.toString());
 
     try {
       const { data } = await fetch(url);
