@@ -12,6 +12,7 @@ export interface QuestionEntity {
   id: number,
   title: string,
   questionOptions: QuestionOptionEntity[],
+  order: number,
 }
 
 export interface QuestionnaireEntity {

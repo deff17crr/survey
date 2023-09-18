@@ -14,4 +14,9 @@ export enum ActionType {
   QUESTIONNAIRE_RESULT_GET = 'questionnaire_result_get',
   QUESTIONNAIRE_RESULT_GET_SUCCESS = 'questionnaire_result_get_success',
   QUESTIONNAIRE_RESULT_GET_ERROR = 'questionnaire_result_get_error',
+
+  QUESTION_ANSWER_CREATE = 'question_answer_create',
+  QUESTION_ANSWER_CREATE_SUCCESS = 'question_answer_create_success',
+  QUESTION_ANSWER_CREATE_ERROR = 'question_answer_create_error',
+  QUESTION_ANSWER_CREATE_RESET = 'question_answer_create_reset',
 }

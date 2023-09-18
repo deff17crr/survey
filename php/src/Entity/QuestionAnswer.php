@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Post(
             normalizationContext: ['question:collection', 'questionAnswer:item'],
             denormalizationContext: ['groups' => ['questionAnswer:create']],
-            security: 'is_granted("CREATE_QUESTION_ANSWER")',
+            securityPostDenormalize: 'is_granted("CREATE_QUESTION_ANSWER", object)',
         )
     ],
 )]
@@ -39,8 +39,8 @@ class QuestionAnswer
     #[ORM\ManyToOne(targetEntity: QuestionnaireResult::class, inversedBy: "questionAnswers")]
     #[Assert\NotNull]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['questionAnswer:item'])]
-    private ?QuestionnaireResult $questionnaireResult;
+    #[Groups(['questionAnswer:create', 'questionAnswer:item'])]
+    private ?QuestionnaireResult $questionnaireResult = null;
 
     #[ORM\ManyToOne(targetEntity: Question::class)]
     #[Assert\NotNull]
@@ -48,8 +48,9 @@ class QuestionAnswer
     #[Groups(['questionAnswer:item', 'questionAnswer:create', 'questionnaireResult:item'])]
     private ?Question $question;
 
-    #[ORM\ManyToOne(targetEntity: QuestionOption::class)]
+    #[ORM\ManyToMany(targetEntity: QuestionOption::class)]
     #[Groups(['questionAnswer:item', 'questionAnswer:create', 'questionnaireResult:item'])]
+    #[Assert\Count(min: 1)]
     private Collection $selectedQuestionOptions;
 
     public function __construct()
@@ -97,7 +98,15 @@ class QuestionAnswer
         return $this->selectedQuestionOptions;
     }
 
-    public function addQuestionOptionSelected(QuestionOption $questionOption): void
+    public function setSelectedQuestionOptions(array $selectedQuestionOptions): void
+    {
+        $this->selectedQuestionOptions = new ArrayCollection();
+        foreach ($selectedQuestionOptions as $questionOption) {
+            $this->addSelectedQuestionOption($questionOption);
+        }
+    }
+
+    public function addSelectedQuestionOption(QuestionOption $questionOption): void
     {
         if (!$this->selectedQuestionOptions->contains($questionOption)) {
             $this->selectedQuestionOptions->add($questionOption);

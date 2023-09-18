@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {QuestionEntity} from "../../state/reducers/questionnaire/list";
-import {FieldValues, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
+import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {ErrorAlert} from "./Alert";
+import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
 
 interface QuestionComponentProperty {
   question: QuestionEntity,
-  // reloadQuestionnaireResult: () => {},
+  questionnaireResult: QuestionnaireResultEntity,
+  reloadQuestionnaireResult: () => void,
 }
 
 export const QuestionForm: React.FC<QuestionComponentProperty> = (props) => {
@@ -12,27 +17,38 @@ export const QuestionForm: React.FC<QuestionComponentProperty> = (props) => {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
   } = useForm();
 
+  const {data: questionAnswerCreated, loading, error} = useTypedSelector(state => state.questionAnswerCreate)
+  const {createQuestionAnswer, resetCreateQuestionAnswer} = useActions();
   const {question} = props;
   const fieldName = 'question_' + question['id'];
   const selectedValues = watch(fieldName);
+  useEffect(() => {
+    if (questionAnswerCreated) {
+      props.reloadQuestionnaireResult();
+      resetCreateQuestionAnswer();
+    }
+  }, [questionAnswerCreated]);
   const onSubmit = (data: any) => {
-    if (data[fieldName].length === 0) {
+    if (data[fieldName].length === 0 || loading) {
       return;
     }
 
-    const answerData = {
+    createQuestionAnswer({
+      questionnaireResult: props.questionnaireResult['@id'],
       question: question['@id'],
-      questionOptionsSelected: data[fieldName],
-    }
+      selectedQuestionOptions: data[fieldName],
+    });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {error && (
+        <ErrorAlert message={error} />
+      )}
       <h3 className={'text-indigo-700 mb-2'}>
-        <span className={'text-gray-700'}>Question:</span> {question['title']}
+        <span className={'text-gray-700'}>Question:</span> {question['title']} order: {question['order']} id: {question['id']}
       </h3>
       {question.questionOptions.map(option => (
         <div className="flex items-center mb-4 pl-4" key={option['id']}>
@@ -54,7 +70,7 @@ export const QuestionForm: React.FC<QuestionComponentProperty> = (props) => {
         <button className={
           "rounded border bg-white border-indigo-500 text-indigo-700 px-4 py-1 ml-4 inline-block hover:opacity-75"
         }>
-          Submit
+          {loading ? 'Loading...' : 'Submit'}
         </button>
         ) : (
         <div className={

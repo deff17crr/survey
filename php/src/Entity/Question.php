@@ -35,9 +35,10 @@ class Question
     #[Assert\NotBlank]
     private string $type = self::TYPE_SINGLE;
 
-//    #[ORM\Column(type: 'integer')]
-//    #[Assert\Range(min: 0)]
-//    private int $order = 0;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\Range(min: 1)]
+    #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
+    private int $order = 1;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
@@ -98,11 +99,29 @@ class Question
         return $this->questionOptions;
     }
 
+    public function setQuestionOptions(array $questionOptions): void
+    {
+        $this->questionOptions = new ArrayCollection();
+        foreach ($questionOptions as $questionOption) {
+            $this->addQuestionOption($questionOption);
+        }
+    }
+
     public function addQuestionOption(QuestionOption $questionOption): void
     {
         if (!$this->questionOptions->contains($questionOption)) {
             $questionOption->setQuestion($this);
             $this->questionOptions->add($questionOption);
         }
+    }
+
+    public function getOrder(): int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(int $order): void
+    {
+        $this->order = $order;
     }
 }

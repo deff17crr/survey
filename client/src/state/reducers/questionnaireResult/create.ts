@@ -8,6 +8,7 @@ export interface QuestionnaireResultEntity {
   questionnaire: QuestionnaireEntity,
   completedAt: string|null,
   questionAnswersQuantity: number,
+  lastAnsweredQuestionOrder: number,
 }
 
 interface QuestionnaireResultCreateState {

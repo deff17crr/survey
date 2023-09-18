@@ -28,7 +28,7 @@ export const Home = () => {
   }
 
   if (questionnaireResultCreate.data) {
-    navigate(`/questionnaire-pass/${questionnaireResultCreate.data['id']}`);
+    navigate(`/questionnaire-pass/${encodeURIComponent(questionnaireResultCreate.data['@id'])}`);
 
     return <></>;
   }

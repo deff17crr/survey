@@ -53,6 +53,11 @@ class QuestionnaireResult
     #[Groups(['questionnaireResult:item'])]
     private Collection $questionAnswers;
 
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['questionnaireResult:item'])]
+    #[Assert\Range(min: 0)]
+    private int $lastAnsweredQuestionOrder = 0;
+
     #[Groups(groups: ['questionnaireResult:item', 'questionnaireResult:collection'])]
     public function getQuestionAnswersQuantity(): int
     {
@@ -112,5 +117,15 @@ class QuestionnaireResult
         }
 
         return false;
+    }
+
+    public function getLastAnsweredQuestionOrder(): int
+    {
+        return $this->lastAnsweredQuestionOrder;
+    }
+
+    public function setLastAnsweredQuestionOrder(int $lastAnsweredQuestionOrder): void
+    {
+        $this->lastAnsweredQuestionOrder = $lastAnsweredQuestionOrder;
     }
 }

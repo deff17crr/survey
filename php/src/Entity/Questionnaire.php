@@ -36,6 +36,7 @@ class Questionnaire
     /** @var Collection|Question[] */
     #[ORM\OneToMany(mappedBy: 'questionnaire', targetEntity: Question::class)]
     #[Groups(groups: ['questionnaire:item', 'questionnaireResult:item'])]
+    #[ORM\OrderBy(["order" => "ASC"])]
     private Collection $questions;
 
     #[Groups(groups: ['questionnaire:item', 'questionnaire:collection'])]
