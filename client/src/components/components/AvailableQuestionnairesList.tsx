@@ -1,4 +1,4 @@
-import {QuestionnaireEntity} from "../../state/reducers/questionnaire/list";
+import {QuestionnaireEntity} from "../../state/entityInterfaces/QuestionnaireEntity";
 
 interface ComponentPropTypes {
   questionnaires: QuestionnaireEntity[],

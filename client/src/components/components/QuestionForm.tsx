@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
-import {QuestionEntity} from "../../state/reducers/questionnaire/list";
+import {QuestionEntity} from "../../state/entityInterfaces/QuestionEntity";
 import {useForm} from "react-hook-form";
 import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {ErrorAlert} from "./Alert";
-import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
+import {QuestionnaireResultEntity} from "../../state/entityInterfaces/QuestionnaireResultEntity";
 
 interface QuestionComponentProperty {
   question: QuestionEntity,

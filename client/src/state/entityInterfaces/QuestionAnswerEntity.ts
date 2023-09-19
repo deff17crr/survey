@@ -1,5 +1,6 @@
-import {QuestionnaireResultEntity} from "../reducers/questionnaireResult/create";
-import {QuestionEntity, QuestionOptionEntity} from "../reducers/questionnaire/list";
+import {QuestionnaireResultEntity} from "./QuestionnaireResultEntity";
+import {QuestionEntity} from "./QuestionEntity";
+import {QuestionOptionEntity} from "./QuestionOptionEntity";
 
 export interface QuestionAnswerEntity {
   '@id': string,

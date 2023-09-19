@@ -1,6 +1,6 @@
 import {ActionType} from "../../action-types";
 import {QuestionnaireResultsGetCommonAction} from "../../actions";
-import {QuestionnaireResultEntity} from "./create";
+import {QuestionnaireResultEntity} from "../../entityInterfaces/QuestionnaireResultEntity";
 
 interface QuestionnaireResultsGetState {
   loading: boolean

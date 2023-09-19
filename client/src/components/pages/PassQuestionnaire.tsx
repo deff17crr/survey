@@ -4,8 +4,8 @@ import NotFound from "../components/NotFound";
 import {useActions} from "../../hooks/useActions";
 import React, {useEffect} from "react";
 import {QuestionForm} from "../components/QuestionForm";
-import {QuestionnaireResultEntity} from "../../state/reducers/questionnaireResult/create";
-import {QuestionEntity} from "../../state/reducers/questionnaire/list";
+import {QuestionnaireResultEntity} from "../../state/entityInterfaces/QuestionnaireResultEntity";
+import {QuestionEntity} from "../../state/entityInterfaces/QuestionEntity";
 import {DefaultAlert} from "../components/Alert";
 
 type RouteParams = {

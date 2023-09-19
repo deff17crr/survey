@@ -1,17 +1,6 @@
 import {ActionType} from "../../action-types";
 import {QuestionnaireResultCreateCommonAction} from "../../actions";
-import {QuestionnaireEntity} from "../questionnaire/list";
-import {QuestionAnswerEntity} from "../../entityInterfaces/QuestionAnswerEntity";
-
-export interface QuestionnaireResultEntity {
-  '@id': string,
-  id: number,
-  questionnaire: QuestionnaireEntity,
-  completedAt: string|null,
-  questionAnswersQuantity: number,
-  lastAnsweredQuestionOrder: number,
-  questionAnswers: QuestionAnswerEntity[],
-}
+import {QuestionnaireResultEntity} from "../../entityInterfaces/QuestionnaireResultEntity";
 
 interface QuestionnaireResultCreateState {
   loading: boolean,

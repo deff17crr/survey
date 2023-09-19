@@ -4,12 +4,12 @@ To start this project, need to run just two commands:
 
 2: load test data: ``docker compose exec php bin/console doctrine:migrations:migrate --no-interaction && docker compose exec php bin/console load-test-data``
 
-Backend Stack: Symfony 6.3.4, PostgreSQL, ApiPlatform
+**Backend Stack:** Symfony 6.3.4, PostgreSQL, ApiPlatform
 
-Frontend Stack: TypeScript, React, Redux, React Hook Form, TailwindCSS
+**Frontend Stack:** TypeScript, React, Redux, React Hook Form, TailwindCSS
 
 
-Sceenshots:
+**Sceenshots:**
 
 
 ![alt text](https://sun9-29.userapi.com/impg/nrHV9tzCg5ZPRr69OWtW_DMaJyuXHFKo6k7WHw/YP39pETKV1o.jpg?size=874x588&quality=95&sign=598e299f8098c5af49e34330c5173b6b&type=album)

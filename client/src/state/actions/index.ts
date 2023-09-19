@@ -1,7 +1,8 @@
 import {ActionType} from "../action-types";
-import {QuestionnaireResultEntity} from "../reducers/questionnaireResult/create";
+import {QuestionnaireResultEntity} from "../entityInterfaces/QuestionnaireResultEntity";
 import {QuestionAnswerEntity} from "../entityInterfaces/QuestionAnswerEntity";
 
+/** @TODO split to different files */
 export interface ListQuestionnaireAction {
   type: ActionType.QUESTIONNAIRE_LIST
 }

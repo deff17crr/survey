@@ -2,7 +2,6 @@ import { ActionType} from "../../action-types";
 import {QuestionAnswerCreateCommonAction} from "../../actions";
 import {Dispatch} from "redux";
 import {fetch} from "../../../utils/fetch";
-import {QuestionnaireResultEntity} from "../../reducers/questionnaireResult/create";
 
 export interface CreateQuestionAnswerData {
   questionnaireResult: string,
