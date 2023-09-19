@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Command;
 
 use App\Entity\Question;
@@ -24,7 +25,6 @@ class LoadTestDataCommand extends Command
         $questionnaire = new Questionnaire();
         $questionnaire->setTitle('Testing Questionnaire Name');
         $this->entityManager->persist($questionnaire);
-
 
         /* question 1 */
         $question1 = new Question();

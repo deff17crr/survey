@@ -1,4 +1,5 @@
 <?php
+
 namespace App\EventListener;
 
 use App\Entity\Question;
@@ -6,7 +7,6 @@ use App\Entity\QuestionAnswer;
 use App\Entity\QuestionOption;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
-use DateTime;
 
 #[AsDoctrineListener('prePersist')]
 class QuestionAnswerCreateListener
@@ -26,7 +26,7 @@ class QuestionAnswerCreateListener
             /** @var Question $lastQuestion */
             $lastQuestion = $questionnaireResult->getQuestionnaire()->getQuestions()->last();
             if ($lastQuestion->getId() === $object->getQuestion()->getId()) {
-                $questionnaireResult->setCompletedAt(new DateTime());
+                $questionnaireResult->setCompletedAt(new \DateTime());
             }
 
             $event->getObjectManager()->persist($questionnaireResult);
@@ -43,8 +43,8 @@ class QuestionAnswerCreateListener
 
         foreach ($object->getQuestion()->getQuestionOptions() as $questionOption) {
             if (
-                !$questionOption->isCorrect() &&
-                in_array($questionOption->getId(), $selectedOptionIds, true)
+                !$questionOption->isCorrect()
+                && in_array($questionOption->getId(), $selectedOptionIds, true)
             ) {
                 $object->setCorrect(false);
             }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Security;
 
 use App\Entity\QuestionAnswer;
@@ -8,12 +9,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class QuestionAnswerVoter extends Voter
 {
-    const CREATE_QUESTION_ANSWER = 'CREATE_QUESTION_ANSWER';
+    public const CREATE_QUESTION_ANSWER = 'CREATE_QUESTION_ANSWER';
 
-//    public function __construct(
-//      private readonly QuestionnaireResultRepository $questionnaireResultRepository,
-//    ) {
-//    }
+    //    public function __construct(
+    //      private readonly QuestionnaireResultRepository $questionnaireResultRepository,
+    //    ) {
+    //    }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -32,7 +33,7 @@ class QuestionAnswerVoter extends Voter
 
     private function canCreate(QuestionAnswer $subject): bool
     {
-        if ($subject->getQuestionnaireResult()->getCompletedAt() !== null) {
+        if (null !== $subject->getQuestionnaireResult()->getCompletedAt()) {
             return false;
         }
 

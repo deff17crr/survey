@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Serializer;
 
 use App\Entity\QuestionnaireResult;
@@ -10,6 +11,7 @@ class QuestionnaireResultNormalizer implements NormalizerInterface, NormalizerAw
 {
     use NormalizerAwareTrait;
     private const ALREADY_CALLED = 'QUESTIONNAIRE_RESULT_ATTRIBUTE_NORMALIZER_ALREADY_CALLED';
+
     public function normalize($object, $format = null, array $context = [])
     {
         /** @var $object QuestionnaireResult */
@@ -20,6 +22,7 @@ class QuestionnaireResultNormalizer implements NormalizerInterface, NormalizerAw
 
         return $this->normalizer->normalize($object, $format, $context);
     }
+
     public function supportsNormalization($data, $format = null, array $context = [])
     {
         // Make sure we're not called twice
@@ -29,8 +32,8 @@ class QuestionnaireResultNormalizer implements NormalizerInterface, NormalizerAw
 
         // support one item normalization only
         if (
-            !array_key_exists('groups', $context) ||
-            !in_array('questionnaireResult:item', $context['groups'], true)
+            !array_key_exists('groups', $context)
+            || !in_array('questionnaireResult:item', $context['groups'], true)
         ) {
             return false;
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Security;
 
 use App\Repository\QuestionnaireResultRepository;
@@ -7,10 +8,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class QuestionnaireResultVoter extends Voter
 {
-    const CREATE_QUESTIONNAIRE_RESULT = 'CREATE_QUESTIONNAIRE_RESULT';
+    public const CREATE_QUESTIONNAIRE_RESULT = 'CREATE_QUESTIONNAIRE_RESULT';
 
     public function __construct(
-      private readonly QuestionnaireResultRepository $questionnaireResultRepository,
+        private readonly QuestionnaireResultRepository $questionnaireResultRepository,
     ) {
     }
 

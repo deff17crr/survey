@@ -14,20 +14,19 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use DateTime;
 
 #[ORM\Entity(repositoryClass: QuestionnaireResultRepository::class)]
 #[ApiResource(
     operations: [
         new Get(normalizationContext: ['groups' => ['questionnaireResult:item']]),
         new GetCollection(normalizationContext: ['groups' => ['questionnaireResult:collection'], 'skip_null_values' => false]),
-        new Post(denormalizationContext: ['groups' => ['questionnaireResult:create']], security: 'is_granted("CREATE_QUESTIONNAIRE_RESULT")')
+        new Post(denormalizationContext: ['groups' => ['questionnaireResult:create']], security: 'is_granted("CREATE_QUESTIONNAIRE_RESULT")'),
     ],
 )]
 #[ApiFilter(
     OrderFilter::class,
     properties: [
-        'completedAt' => ['completedAt' => ['nulls_comparison' => OrderFilter::NULLS_ALWAYS_FIRST, 'default_direction' => 'DESC']]
+        'completedAt' => ['completedAt' => ['nulls_comparison' => OrderFilter::NULLS_ALWAYS_FIRST, 'default_direction' => 'DESC']],
     ],
     arguments: ['orderParameterName' => 'order']
 )]
@@ -47,7 +46,7 @@ class QuestionnaireResult
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     #[Groups(['questionnaireResult:item', 'questionnaireResult:collection'])]
-    private ?DateTime $completedAt;
+    private ?\DateTime $completedAt;
 
     #[ORM\OneToMany(mappedBy: 'questionnaireResult', targetEntity: QuestionAnswer::class)]
     #[Groups(['questionnaireResult:completed'])]
@@ -84,12 +83,12 @@ class QuestionnaireResult
         $this->questionnaire = $questionnaire;
     }
 
-    public function getCompletedAt(): ?DateTime
+    public function getCompletedAt(): ?\DateTime
     {
         return $this->completedAt;
     }
 
-    public function setCompletedAt(DateTime $completedAt): void
+    public function setCompletedAt(\DateTime $completedAt): void
     {
         $this->completedAt = $completedAt;
     }
@@ -111,7 +110,7 @@ class QuestionnaireResult
     {
         foreach ($this->questionAnswers as $questionAnswer) {
             /** @var $questionAnswer QuestionAnswer */
-            if ($questionAnswer->getId() !== null && $questionAnswer->getQuestion()->getId() === $question->getId()) {
+            if (null !== $questionAnswer->getId() && $questionAnswer->getQuestion()->getId() === $question->getId()) {
                 return true;
             }
         }
@@ -131,6 +130,6 @@ class QuestionnaireResult
 
     public function isCompleted(): bool
     {
-        return $this->completedAt !== null;
+        return null !== $this->completedAt;
     }
 }

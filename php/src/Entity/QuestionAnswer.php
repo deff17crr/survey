@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['question:collection', 'questionAnswer:item'],
             denormalizationContext: ['groups' => ['questionAnswer:create']],
             securityPostDenormalize: 'is_granted("CREATE_QUESTION_ANSWER", object)',
-        )
+        ),
     ],
 )]
 class QuestionAnswer
@@ -37,7 +37,7 @@ class QuestionAnswer
     #[Groups(['questionnaireResult:completed'])]
     private bool $correct = true;
 
-    #[ORM\ManyToOne(targetEntity: QuestionnaireResult::class, inversedBy: "questionAnswers")]
+    #[ORM\ManyToOne(targetEntity: QuestionnaireResult::class, inversedBy: 'questionAnswers')]
     #[Assert\NotNull]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['questionAnswer:create', 'questionAnswer:item'])]
